@@ -18,7 +18,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar absolute dark color="blue darken-1">
+    <v-app-bar absolute dark color="blue darken-1" app>
       <v-app-bar-nav-icon @click="drawer=!drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>Ad application</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -34,7 +34,7 @@
     </v-app-bar>
 
     <v-main>
-      <router-view></router-view>
+      <router-view ></router-view>
     </v-main>
 
     </v-app>
@@ -52,7 +52,7 @@ export default {
       { title: 'Registration', icon: 'mdi-face', url: '/registration'},
       { title: 'Orders', icon: 'mdi-book-account', url: '/orders'},
       { title: 'New ad', icon: 'mdi-book-plus', url: '/newAd'},
-      { title: 'My ads', icon: 'mdi-format-list-text', url: '/myAds'},
+      { title: 'Ad list', icon: 'mdi-format-list-text', url: '/adList'},
     ],
   }),
 };

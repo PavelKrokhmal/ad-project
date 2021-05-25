@@ -4,7 +4,7 @@
       <v-flex xs12 offset-sm3 sm6>
         <h1 class="text--secondary mt-4 ml-12">My ads</h1>
         <v-card class="mt-4 mx-auto" 
-          v-for="(ad, i) in ads"
+          v-for="(ad, i) in myAds"
           :key="i"
           width="800px" 
           height="200px" 
@@ -38,52 +38,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      ads: [
-        {
-          title: '1 ad', 
-          description: 'Description', 
-          promo: false, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg', 
-          id: 1
-        },
-        {
-          title: '2 ad', 
-          description: 'Description', 
-          promo: true, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg', 
-          id: 2
-        },
-        {
-          title: '3 ad', 
-          description: 'Description', 
-          promo: true, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg', 
-          id: 3
-        },
-        {
-          title: '4 ad', 
-          description: 'Description', 
-          promo: false, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-          id: 4
-        },
-        {
-          title: '5 ad', 
-          description: 'Description', 
-          promo: false, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-          id: 5
-        },
-        {
-          title: '6 ad', 
-          description: 'Description', 
-          promo: false, 
-          imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-          id: 6
-        }
-      ],
+  computed: {
+    myAds () {
+      return this.$store.getters.myAds
     }
   }
 }

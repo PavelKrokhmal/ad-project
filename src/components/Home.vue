@@ -5,7 +5,7 @@
     <v-container fluid>
       <v-carousel>
         <v-carousel-item
-          v-for="(ad,i) in ads"
+          v-for="(ad,i) in promoAds"
           :key="i"
           :src="ad.imageSrc"
           reverse-transition="fade-transition"
@@ -54,52 +54,12 @@
 
 <script>
 export default {
-  data () {
-    return {
-      ads: [
-          {
-            title: '1 ad', 
-            description: 'Description', 
-            promo: false, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg', 
-            id: 1
-          },
-          {
-            title: '2 ad', 
-            description: 'Description', 
-            promo: true, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg', 
-            id: 2
-          },
-          {
-            title: '3 ad', 
-            description: 'Description', 
-            promo: true, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg', 
-            id: 3
-          },
-          {
-            title: '4 ad', 
-            description: 'Description', 
-            promo: false, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-            id: 4
-          },
-          {
-            title: '5 ad', 
-            description: 'Description', 
-            promo: false, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-            id: 5
-          },
-          {
-            title: '6 ad', 
-            description: 'Description', 
-            promo: false, 
-            imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', 
-            id: 6
-          }
-      ],
+  computed: {
+    promoAds () {
+      return this.$store.getters.promoAds
+    },
+    ads () {
+      return this.$store.getters.ads
     }
   }
 }

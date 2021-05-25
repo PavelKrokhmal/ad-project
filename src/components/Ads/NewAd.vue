@@ -31,7 +31,7 @@
                     Ad preview
                   </v-card-title>
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
+                    :src="imageSrc"
                     height="200"
                     class="grey darken-4"
                   ></v-img>
@@ -76,7 +76,8 @@ export default {
       title: '',
       description: '',
       valid: false,
-      promo: false
+      promo: false,
+      imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
     }
   },
   methods: {
@@ -85,10 +86,12 @@ export default {
         const ad = {
           title: this.title,
           description: this.description,
-          promo: this.promo
+          promo: this.promo,
+          imageSrc: this.imageSrc
         }
 
-        console.log(ad)
+        this.$store.dispatch('createAd', ad)
+
       }
     }
   }

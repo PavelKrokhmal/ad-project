@@ -42,8 +42,9 @@
                 <div class="mt-4 d-flex justify-end">
                   <v-btn
                     color="green"
-                    :dark="valid"
-                    :disabled="!valid"
+                    :dark="!loading && valid"
+                    :disabled="!valid || loading"
+                    :loading="loading"
                     @click="onSubmit">
                     Create account
                   </v-btn>
@@ -58,6 +59,11 @@
 
 <script>
 export default {
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   data () {
     return {
       email: '',
@@ -85,7 +91,11 @@ export default {
           email: this.email,
           password: this.password
         }
-        console.log(user)
+        this.$store.dispatch('registerUser', user)
+        .then(() => {
+          this.$router.push('/')
+        })
+        // .catch(err => console.log(err))
       }
     }
   }

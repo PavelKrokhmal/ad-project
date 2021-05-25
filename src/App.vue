@@ -41,6 +41,19 @@
       <router-view ></router-view>
     </v-main>
 
+    <v-snackbar
+      :timeout="5000"
+      color="red"
+      :vertical="vertical"
+      :value="!!error">
+      {{ error }}
+      <template v-slot:action="{ attrs }">
+        <v-btn text @click="closeError" v-bind="attrs">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     </v-app>
 </template>
 
@@ -50,6 +63,7 @@ export default {
   name: 'App',
 
   data: () => ({
+    snackbar: false,
     drawer: false,
     links: [
       { title: 'Login', icon: 'mdi-login', url: '/login'},
@@ -59,6 +73,16 @@ export default {
       { title: 'Ad list', icon: 'mdi-format-list-text', url: '/adList'},
     ],
   }),
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
+    }
+  }
 };
 </script>
 

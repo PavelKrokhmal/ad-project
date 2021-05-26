@@ -1,6 +1,4 @@
 <template>
- 
-
   <div>
     <v-container fluid>
       <v-carousel>

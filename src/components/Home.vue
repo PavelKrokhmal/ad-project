@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <v-container fluid>
       <v-carousel>
         <v-carousel-item
@@ -16,8 +16,7 @@
         </v-carousel-item>
       </v-carousel>
     </v-container>
-
-  <v-container fluid >
+    <v-container fluid>
       <v-layout row>
         <v-row class="d-flex justify-center">
           <v-col v-for="(ad,i) in ads" :key="i" cols="auto">
@@ -47,12 +46,28 @@
       </v-layout>
     </v-container>
   </div>
-
+  <div v-else>
+    <v-container fluid>
+      <v-layout row fill-height class="mt-4">
+        <v-flex xs12 class="text-center">
+          <v-progress-circular
+            :size="100"
+            :width="7"
+            color="orange"
+            indeterminate
+          ></v-progress-circular>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   computed: {
+    loading () {
+      return this.$store.getters.loading
+    },
     promoAds () {
       return this.$store.getters.promoAds
     },

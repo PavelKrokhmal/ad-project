@@ -8,7 +8,6 @@
           two-line
           flat>
             <v-list-item-group
-              v-model="settings"
               multiple>
 
               <v-list-item v-for="(order, index) in orders" :key="index">

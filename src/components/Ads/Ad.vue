@@ -16,11 +16,18 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <app-edit-ad-modal :ad="ad" v-if="isOwner"/>
-            <v-btn dark class="green">Buy</v-btn>
+            <div class="ml-2">
+              <app-buy-modal :ad="ad"></app-buy-modal>
+            </div>
           </v-card-actions>
         </v-card>
         <div v-else class="text-xs-center mt-4">
-          Loading...
+          <v-progress-circular
+            :size="100"
+            :width="7"
+            color="gray"
+            indeterminate
+        ></v-progress-circular>
         </div>
       </v-flex>
     </v-layout>

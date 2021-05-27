@@ -6,17 +6,17 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-          color="orange"
+          color="blue"
           dark
           v-bind="attrs"
           v-on="on"
         >
-          Edit
+          Buy
         </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <h1 class="headline">Edit ad</h1>
+          <h1 class="headline">Do you want to buy it? </h1>
         </v-card-title>
         <v-divider></v-divider>
         <v-card-text>
@@ -26,23 +26,26 @@
                 cols="12"
               >
                 <v-text-field
-                  v-model="editedTitle"
+                  v-model="name"
                   type="text"
-                  label="Title"
+                  label="Your name"
                   required>
                 </v-text-field>
 
               </v-col>
+              
               <v-col
                 cols="12"
               >
-                <v-textarea
-                  v-model="editedDescription"
-                  required
-                  outlined
-                  label="Description"
-                ></v-textarea>
+               <v-text-field
+                  v-model="phone"
+                  type="text"
+                  label="Your phone"
+                  required>
+                </v-text-field>
+
               </v-col>
+
             </v-row>
           </v-container>
         </v-card-text>
@@ -52,6 +55,7 @@
           <v-btn
             color="red"
             text
+            :disabled="localLoading"
             @click="dialog = false"
           >
             Close
@@ -59,9 +63,11 @@
           <v-btn
             color="blue"
             text
-            @click="onSave"
+            :loading="localLoading"
+            :disabled="localLoading"
+            @click="onBuy"
           >
-            Save
+            Buy it!
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -74,28 +80,35 @@ export default {
   data () {
     return {
       dialog: false,
-      editedTitle: this.ad.title,
-      editedDescription: this.ad.description    
+      name: '',
+      phone: '',
+      localLoading: false    
     }
   },
   methods: {
-    onSave () {
-      if(!!this.editedTitle.trim() && !!this.editedDescription.trim()) {
-        this.dialog = false
-
-        this.$store.dispatch('updateAd', {
-          title: this.editedTitle,
-          description: this.editedDescription,
-          id: this.ad.id
+    onBuy () {
+      if(this.name.trim() && this.phone.trim()) {
+        this.localLoading = true  
+        this.$store.dispatch('createOrder', {
+          name: this.name,
+          phone: this.phone,
+          adId: this.ad.id,
+          ownerId: this.ad.ownerId
+        })
+        .finally(() => {
+          this.name = '',
+          this.phone = ''
+          this.localLoading = false
+          this.dialog = false
         })
       }
     }
   },
   watch: {
     dialog: function (val) {
-      if (val) {
-        this.editedTitle = this.ad.title,
-        this.editedDescription = this.ad.description  
+      if (!val) {
+        this.name = '',
+        this.phone = ''  
       }
     },
   }

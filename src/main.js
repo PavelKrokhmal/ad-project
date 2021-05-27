@@ -5,7 +5,11 @@ import router from './router'
 import store from './store'
 import firebase from 'firebase'
 
+import BuyModalComponent  from './components/Shared/BuyModal.vue'
+
 Vue.config.productionTip = false
+
+Vue.component('app-buy-modal', BuyModalComponent)
 
 new Vue({
   vuetify,

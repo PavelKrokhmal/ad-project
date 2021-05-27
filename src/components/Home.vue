@@ -36,9 +36,9 @@
                 <v-btn text :to="'/ad/' + ad.id">
                   Open
                 </v-btn>
-                <v-btn text class="primary">
-                  Buy
-                </v-btn>
+                <div class="ml-2">
+                  <app-buy-modal :ad="ad"></app-buy-modal>
+                </div>
               </v-card-actions>
             </v-card>
           </v-col>

@@ -1,24 +1,20 @@
-# ad-project
+# React App Quiz
 
-## Project setup
-```
-npm install
-```
+---
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Self-study course of Vue by Vladilen Minin.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+The target is to create ad-app using Vue framework & Vuetify library 
 
-### Lints and fixes files
-```
-npm run lint
-```
+Used technologies: HTML, CSS, JavaScript, Vue, Vuetify, vuex, vue-router, firebase
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+---
+
+## Installation & Run
+
+```
+$ git clone https://github.com/PavelKrokhmal/ad-project
+$ cd ./ad-project
+$ npm install
+$ npm run serve
+```

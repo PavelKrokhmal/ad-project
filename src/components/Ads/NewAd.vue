@@ -38,10 +38,18 @@
                   <v-card-actions class="title">
                     <v-btn
                       color="orange"
+                      @click="triggerUpload"
                       class="white--text">
                       Upload
                       <v-icon right dark> mdi-cloud-upload </v-icon>
                     </v-btn>
+                    <v-file-input
+                      style="display: none;"
+                      ref="fileInput"
+                      accept="image/*"
+                      label="File input"
+                      @change="onFileChange"
+                    ></v-file-input>
                   </v-card-actions>
                 </v-card>
               </v-col>
@@ -60,7 +68,7 @@
           <v-layout>
             <v-flex xs12>
               <v-spacer></v-spacer>
-              <v-btn class="success" @click="createAd" :disabled="!valid || loading" :loading="loading">Create ad</v-btn>
+              <v-btn class="success" @click="createAd" :disabled="!valid || !image || loading" :loading="loading">Create ad</v-btn>
             </v-flex>
           </v-layout>
 
@@ -82,17 +90,19 @@ export default {
       description: '',
       valid: false,
       promo: false,
-      imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+      imageSrc: '',
+      image: null
     }
   },
   methods: {
     createAd () {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.form.validate() && this.image) {
         const ad = {
           title: this.title,
           description: this.description,
           promo: this.promo,
-          imageSrc: this.imageSrc
+          imageSrc: this.imageSrc,
+          image: this.image
         }
 
         this.$store.dispatch('createAd', ad)
@@ -102,6 +112,21 @@ export default {
           .catch(() => {})
 
       }
+    },
+    triggerUpload () {
+      // optimization fix
+      const id = this.$refs.fileInput.$el.lastChild.firstChild.firstChild.lastChild.id;
+      document.querySelector(`input#${id}`).click();
+    },
+    onFileChange (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        this.imageSrc = reader.result
+      }
+
+      reader.readAsDataURL(file)
+
+      this.image = file
     }
   }
 }
